@@ -1,3 +1,3 @@
 # Users-List-Master
 
-### Separate app's components project
+### Separate components app project
