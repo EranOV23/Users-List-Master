@@ -1,3 +1,8 @@
+let $ = require("jquery"),
+    UserPageComponent = require("./UserPage.component"),
+    UsersListComponent = require("./UsersList.component"),
+    userService = require("./UserService");
+
 class AppComponent {
 
     getUsersList() {
@@ -12,16 +17,20 @@ class AppComponent {
         this.element.append( usersList.render() );
     }
 
+    appendUserPage(id){
+        if(this.userPageElement)
+            this.userPageElement.remove();
+
+        let userPage = new UserPageComponent(id);
+        this.userPageElement = userPage.render();
+        this.element.append( this.userPageElement );
+
+    }
+
     render(){
         this.element = $(`<div></div>`);
         this.getUsersList();
         return this.element;
-    }
-
-    appendUserPage(id){
-        let userPage = new UserPageComponent(id);
-        $("main").detach();
-        this.element.append( userPage.render() );
     }
 
 }
@@ -31,4 +40,4 @@ function createApp(){
     $(document.body).append( app.render() );
 }
 
-createApp();
+module.exports = createApp;

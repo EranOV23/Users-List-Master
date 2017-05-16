@@ -1,3 +1,5 @@
+let $ = require("jquery");
+
 class UsersListComponent {
     constructor(usersList){
         this.usersList = usersList;
@@ -34,3 +36,4 @@ class UsersListComponent {
     }
 }
 
+module.exports = UsersListComponent;

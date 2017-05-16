@@ -1,3 +1,10 @@
+let $ = require("jquery"),
+    UserDetailsComponent = require("./UserDetails.component"),
+    userPostsComponent = require("./UserPostscomponent"),
+    userService = require("./UserService"),
+    UserPostsService = require("./UserPostsService");
+
+
 class UserPageComponent {
     constructor(userId){
         this.userId = userId;
@@ -13,24 +20,30 @@ class UserPageComponent {
     appendUserDetails(user){
         this.user = user;
         let userComponent = new UserDetailsComponent(user);
-        this.element.append( userComponent.render() );
-        return this.getUsersPosts(user);
+        this.element.find(".details").append( userComponent.render() );
     }
 
-    getUsersPosts(user){
-        userPostsService
-            .getUserPosts(user.id)
+    getUsersPosts(){
+        UserPostsService
+            .getUserPosts(this.userId)
             .then( this.appendUserPosts.bind(this) );
     }
 
     appendUserPosts(posts){
-        let PostsComponent = new UserPostsComponent(posts, this.user);
-        this.element.append( PostsComponent.render() );
+        let PostsComponent = new userPostsComponent(posts, this.user);
+        this.element.find(".posts").append( PostsComponent.render() );
     }
 
     render(){
-        this.element = $(`<main></main>`);
+        this.element = $(
+            `<main>
+                <div class="details"></div>
+                <div class="posts"></div>
+            </main>`);
         this.getUser();
+        this.getUsersPosts();
         return this.element;
     }
 }
+
+module.exports = UserPageComponent;

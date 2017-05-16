@@ -1,7 +1,10 @@
+$backColor : #aac2da;
+
+
 html, body {
     margin: 0;
     padding: 0;
-    background: #aac2da;
+    background: $backColor;
     font-family: sans-serif, "Open Sans";
     font-weight: 300;
 }
@@ -16,13 +19,15 @@ nav {
     position: absolute;
     top: 0;
     left: 0;
+
+    ul, li {
+        margin:0;
+        padding:0;
+        list-style: none;
+    }
 }
 
-ul, li {
-    margin:0;
-    padding:0;
-    list-style: none;
-}
+
 
 main {
     background: #d9dcf0;
